@@ -14,4 +14,6 @@ for j in str:
 
 # 예제
 for j in tweets:
-    print(j['full_text'])
+    # print(j['created_at']) # 각 트윗 생성일 출력
+    # print(j['id_str']) # 각 트윗 id 출력
+    print(j['full_text']) # 각 트윗 글 출력
