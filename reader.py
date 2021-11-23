@@ -1,10 +1,11 @@
 import json
 
-f = open("./twitter.json", mode="r")
+f_input = open("./twitter.json", mode="r")
+f_output = open("C:/Users/osb04/Desktop/Vscode/Datamining/twitter.txt", mode="w", encoding='utf8')
 str = []
 tweets = []
 
-str = f.readlines()
+str = f_input.readlines()
 
 for j in str:
     tweets.append(json.loads(j))
@@ -16,4 +17,7 @@ for j in str:
 for j in tweets:
     # print(j['created_at']) # 각 트윗 생성일 출력
     # print(j['id_str']) # 각 트윗 id 출력
-    print(j['full_text']) # 각 트윗 글 출력
+    # print(j['full_text']) # 각 트윗 글 출력
+    f_output.write(j['full_text'])
+    
+print("END")
