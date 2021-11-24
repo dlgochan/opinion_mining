@@ -1,18 +1,19 @@
 import json
 from hanspell import spell_checker
 
-f_input = open("./twitter.json", mode="r")
+f_input = open("rm_dup.json", mode="r")
+f_output = open("hanspell.json", mode="w")
 str = []
-tweets = []
+tmp = []
 
 str = f_input.readlines()
 
 for j in str:
-    tweets.append(json.loads(j))
-
-
-for j in tweets:
-    sent = j['full_text']
-    spelled_sent = spell_checker.check(sent)
-    hanspell_sent = spelled_sent.checked
-    print(hanspell_sent + '\n')
+    tweet = json.loads(j)
+    text = tweet['text']
+    spelled_text = spell_checker.check(text) # 맞춤법 교정
+    tmp = {'text' : spelled_text.checked} # checked > 교정 결과
+    tmp2 = json.dumps(tmp)
+    print(tmp) # 잘 들어갔나 확인용
+    f_output.write(tmp2)
+    f_output.write('\n')
