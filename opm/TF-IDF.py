@@ -3,9 +3,9 @@ from math import log # IDF 계산을 위해
 import json
 
 str=[]
-f_input = open("C:/Users/wngus/Documents/GitHub/opinion_mining/opm/hanspell.json", mode="r")
-f_input2 = open("C:/Users/wngus/Documents/GitHub/opinion_mining/nlp/okt.json", mode="r")
-f_output = open("C:/Users/wngus/Desktop/tfidf.txt", mode="w", encoding='utf8')
+f_input = open("/content/drive/MyDrive/hanspell.json", mode="r")
+f_input2 = open("/content/drive/MyDrive/okt.json", mode="r")
+f_output = open("/content/drive/MyDrive/tfidf.json", mode="w", encoding='utf8')
 
 str = f_input.readlines() #전체 트윗
 str2 = f_input2.readlines() #단어(명사/형용사)
@@ -73,13 +73,15 @@ tfidf_result = []
 for i in range(N):
     tfidf_result.append([])
     d = docs[i]
+    print(d)
     for j in range(len(vocab)):
         t = vocab[j]
-
+        #print(t)
         tfidf_result[-1].append(tfidf(t,d))
+print(tfidf_result)
 
 tfidf_ = pd.DataFrame(tfidf_result, columns = vocab)
-print(tfidf)
+print(tfidf_)
 
 for result in tfidf_result:
     tmp = {'tfidf' : result}
