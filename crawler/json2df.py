@@ -32,3 +32,7 @@ for tweet in tweets:
         print(df)
 
     i+=1
+
+df.to_csv("../nlp/tweets.csv")
+
+# 이제부터 자연어 처리 시작
