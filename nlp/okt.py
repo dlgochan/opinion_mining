@@ -15,10 +15,6 @@ stopwords = [x.strip() for x in stopwords]
 okt = Okt()
 
 df = pd.read_csv("hanspell.csv")
-# columns = []
-# df2 = pd.DataFrame(columns=columns)
-
-
 
 def okt_noun(text):
     tmp = []
@@ -44,5 +40,4 @@ def okt_verb(text):
 df['okt_noun'] = df['han_text'].apply(lambda x : okt_noun(x))
 df['okt_verb'] = df['han_text'].apply(lambda x : okt_verb(x)) # verb에 동사, 형용사, 부사
 
-df.drop(['Unnamed: 0'], axis=1, inplace=True) # Unnamed column 제거
 df.to_csv('words2.csv')
