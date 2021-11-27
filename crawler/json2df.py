@@ -27,10 +27,6 @@ for tweet in tweets:
     row = [tweet['text']]
     series = pd.Series(row, index=df.columns)
     df = df.append(series, ignore_index=True)
-    if i < 5:
-        print(row)
-        print(df)
-
     i+=1
 
 df.to_csv("../nlp/tweets.csv")
