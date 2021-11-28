@@ -5,6 +5,8 @@ import sys
 import requests
 import json
 
+f = open("C:/Users/wngus/Desktop/result.json", mode='w')     # 쓰기 모드
+result=[]
 client_id = "go0qt8vm6i"
 client_secret = "6zy44GwDgpAROILjgVuhBXFnfAZmuRzFHJ1e5etS"
 url="https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze"
@@ -23,8 +25,11 @@ data = {
 print(json.dumps(data, indent=4, sort_keys=True))
 response = requests.post(url, data=json.dumps(data), headers=headers)
 rescode = response.status_code
+
 if(rescode == 200):
-    print (response.text)
+    result = response.text
+    f.write(json.dumps(result))
+    f.write('\n')
 else:
     print("Error : " + response.text)
 
