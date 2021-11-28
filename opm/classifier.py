@@ -2,6 +2,31 @@ from sklearn.model_selection import train_text_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.metrics import confusion_matrix
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
+import matplotlib.pyplot as plt
+import pandas as pd
+from konlpy.tag import Okt
+
+
+df = pd.read_csv("C:/Users/wngus/Documents/GitHub/opinion_mining/opm/words2.csv")
+
+
+# corpus index 생성
+index_vectorizer = CountVectorizer() # 토큰화, 벡터화를 같이 해줌
+X = index_vectorizer.fit_transform(df['okt_verb']) # 토큰화 이미 해놨으니까 그냥 해놓은거 넣기만 하면 됨
+# (5744, 7269) :  7269의 feature를 가진 5744개의 학습 데이터 셋 
+
+print(X.shape)
+print(X[1])
+print('===================================================')
+
+# TF-IDF
+tfidf_vectorizer = TfidfTransformer()
+X = tfidf_vectorizer.fit_transform(X)
+
+print(X.shape)
+print(X[1])
 
 y=df['y']
 x_train, x_test, y_train, y_test = train_text_split(X,y,test_size=0.30)

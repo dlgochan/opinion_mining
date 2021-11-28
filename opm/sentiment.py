@@ -35,7 +35,7 @@ for num in hantext:
     rescode = response.status_code
     if(rescode == 200):
         result = response.text
-        f.write(json.dumps(result))
+        f.write(result)
         f.write('\n')
     else:
         print("Error : " + response.text)
