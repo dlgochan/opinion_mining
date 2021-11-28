@@ -5,6 +5,7 @@ import requests
 import json
 
 f = open("C:/Users/wngus/Desktop/result.json", mode='w')     # 쓰기 모드
+result = []
 
 #감정분석 API 연동
 client_id = "go0qt8vm6i"
@@ -34,7 +35,7 @@ for num in hantext:
     rescode = response.status_code
     if(rescode == 200):
         result = response.text
-        f.write(json.dumps(result._json))
+        f.write(json.dumps(result))
         f.write('\n')
     else:
         print("Error : " + response.text)
