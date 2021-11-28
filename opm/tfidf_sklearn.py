@@ -1,8 +1,6 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 import pandas as pd
-from konlpy.tag import Okt
-
 
 df = pd.read_csv("../nlp/words2.csv")
 

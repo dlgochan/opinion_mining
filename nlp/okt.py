@@ -2,10 +2,7 @@
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import re
 from konlpy.tag import Okt
-from collections import Counter
 
 with open('./korean_stopwords.txt', encoding='utf8') as f:
     stopwords = f.readlines()
