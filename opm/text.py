@@ -23,8 +23,10 @@ data = {
 print(json.dumps(data, indent=4, sort_keys=True))
 response = requests.post(url, data=json.dumps(data), headers=headers)
 rescode = response.status_code
+
 if(rescode == 200):
-    print (response.text)
+    text = response.text
+    print(text)
 else:
     print("Error : " + response.text)
 
