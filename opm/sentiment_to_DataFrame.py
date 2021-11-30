@@ -13,10 +13,10 @@ for j in str:
     if tmp['document']['sentiment'] == 'positive':
         y.append(1)
     elif tmp['document']['sentiment'] == 'negative':
-        y.append(2)
+        y.append(0)
     else:
         if tmp['document']['confidence']['negative'] > tmp['document']['confidence']['positive']:
-            y.append(2)
+            y.append(0)
         else:
             y.append(1)
 
