@@ -16,7 +16,7 @@ df = pd.read_csv("C:/Users/wngus/Documents/GitHub/opinion_mining/opm/words2.csv"
 
 # corpus index 생성
 index_vectorizer = CountVectorizer() # 토큰화, 벡터화를 같이 해줌
-X = index_vectorizer.fit_transform(df['okt_verb']) # 토큰화 이미 해놨으니까 그냥 해놓은거 넣기만 하면 됨
+X = index_vectorizer.fit_transform(df['okt_noun']) # 토큰화 이미 해놨으니까 그냥 해놓은거 넣기만 하면 됨
 # (5744, 7269) :  7269의 feature를 가진 5744개의 학습 데이터 셋 
 
 print(X.shape)
@@ -34,7 +34,7 @@ print(X[1])
 #test용 데이터셋 분리
 print("random sampling X- train_test label")
 y=df['y']
-x_train, x_test, y_train, y_test = train_test_split(X,y,test_size=0.30)
+x_train, x_test, y_train, y_test = train_test_split(X,y,test_size=0.30, random_state=30)
 print(x_train.shape)
 print(x_test.shape)
 
@@ -75,7 +75,7 @@ print("random sampling O - train_test label")
 random_idx = positive_random_idx+negative_random_idx
 sample_X=X[random_idx,:]
 y= df['y'][random_idx]
-x_train, x_test, y_train, y_test = train_test_split(sample_X, y, test_size = 0.30)
+x_train, x_test, y_train, y_test = train_test_split(sample_X, y, test_size = 0.30,random_state=30)
 print(x_train.shape)
 print(x_test.shape)
 
@@ -116,11 +116,16 @@ print(str(invert_index_vectorizer)[:100]+'..')
 
 print("Positive top 20")
 #계수가 높은 feature는 립에 긍정적인 영향을 주는 형태소
-for coef in coef_pos_index[:20]:
-    print(invert_index_vectorizer[coef[1]],coef[0])
+i=0
+for coef in coef_pos_index[:40]:
+    print(i,invert_index_vectorizer[coef[1]],coef[0])
+    i+=1
+print("================================================================")
 
 print("Negative top 20==========")
+i=0
 #계수가 높은 feature는 립에 부정적인 영향을 주는 형태소
-for coef in coef_pos_index[-20:]:
-    print(invert_index_vectorizer[coef[1]],coef[0])
+for coef in coef_pos_index[-40:]:
+    print(i, invert_index_vectorizer[coef[1]],coef[0])
+    i+=1
 # %%
