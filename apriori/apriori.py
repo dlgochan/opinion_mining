@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 #     []
 # ]
 transactions = []
-stop_word = ['위드', '코로나', '단계적', '단계', '일상', '회복', '백신', '패스', '진자']
+stop_word = ['위드', '코로나', '단계적', '단계', '일상', '회복', '백신', '패스', '진자', '오늘', '월일', '다음', '네이버', '출처', '뉴스']
 df = pd.read_csv("./words2.csv") # 명사 나눈거 가져오기
 tmp = df['okt_noun'] # 각 행을 배열에 담기
 
@@ -36,9 +36,9 @@ for i in range(0, len(transactions)):
 
 # apriori 수행
 results = list(apriori(transactions,  # apriori 파라미터 조절
-            min_support=100/5745,
-            min_confidence=0.3,
-            min_lift=1.0,
+            min_support=20/5745,
+            min_confidence=0.8,
+            min_lift=3.0,
             # min_lift=0.8,
             max_length=2))
 
@@ -72,16 +72,18 @@ for key in counter.keys():
     series = pd.Series(row, index=node_df.columns)
     node_df = node_df.append(series, ignore_index=True)
 
-node_df = node_df[node_df['nodesize'] >= 100]  # node의 최소 frequency 조절
+node_df = node_df[node_df['nodesize'] >= 20]  # node의 최소 frequency 조절
 print(node_df.head())
 #################################################################
 # 아래에서 부터 graph 로 표현
 plt.figure(figsize=(25,25))
 G = nx.Graph()
-for index, row in node_df.iterrows():
-    G.add_node(row['node'], nodesize=row['nodesize'])
-
+# for index, row in node_df.iterrows():
+    # G.add_node(row['node'], nodesize=row['nodesize'])
+    
 for index, row in network_df.iterrows():
+    G.add_node(row['source'], nodesize=1/(row['support']*5000)*5000)
+    G.add_node(row['target'], nodesize=1/(row['support']*5000)*5000)
     G.add_weighted_edges_from([(row['source'], row['target'], row['support'])])
 
 

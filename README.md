@@ -11,10 +11,12 @@
 
 자연어 정제(띄어쓰기, 오타?, 이모티콘, 영어 제거) : nlp/tweets.csv > nlp/text_cleaning.py > nlp/hanspell.csv
 
-정제된 트윗 text를 명사와 용언으로 분류 : nlp/hanspell.csv, nlp/korean_stopwords.txt > nlp/okt.py > nlp/words#.csv
+
+    정제된 트윗 text를 명사와 용언으로 분류 : nlp/hanspell.csv, nlp/korean_stopwords.txt > nlp/okt.py > nlp/words#.csv
+
+    트윗에 나온 명사들 apriori로 관계 분석 : apriori/words2.csv > networkx package를 이용한 gui
 
 
-트윗에 나온 명사들 apriori로 관계 분석 : apriori/words2.csv > networkx package를 이용한 gui
 
 
 

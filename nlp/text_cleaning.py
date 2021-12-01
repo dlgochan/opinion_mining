@@ -29,7 +29,7 @@ def text_hanspell(text):
 df3 = pd.DataFrame(columns=columns)
 df3['han_text'] = df2['ko_text'].apply(lambda x : text_hanspell(x))
 
-df3.to_csv("../nlp/hanspell.csv")
+df3.to_csv("./hanspell.csv")
     
 # ============================ 여기까지 맞춤법 교정
 
