@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 #     []
 # ]
 transactions = []
-df = pd.read_csv("./words2.csv") # 명사 나눈거 가져오기
+stop_word = ['위드', '코로나', '진자', '백신', '패스', '단계적', '일상', '회복']
+df = pd.read_csv("./apriori/words2.csv") # 명사 나눈거 가져오기
 tmp = df['okt_noun'] # 각 행을 배열에 담기
 
 # df['okt_noun'] 에 담겨있는 문자열을 list 자료형으로 변환
@@ -21,6 +22,7 @@ for t in tmp:
 i=0
 for t in transactions:
     transactions[i] = t.split("', '")
+        
     i += 1
     # print(t[0])
 ################################################## 이제 transactions 에 각 트윗별 명사들 list형으로 저장됨
