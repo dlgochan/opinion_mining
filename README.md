@@ -17,13 +17,16 @@
     트윗에 나온 명사들 apriori로 관계 분석 : apriori/words2.csv > networkx package를 이용한 gui
 
 
-자연어 정제 완료한 tweet들(hanspell.csv)로 텍스트 감정분석 API 진행한 결과 : opm/sentiment.py > opm/sentiment_result.json
-텍스트 감정분석 결과가 저장된 json 형식 파일에서 긍정/부정 tweet 판단 결과를 DataFrame으로 저장 : opm/sentiment_to_DataFrame.py > opm/y_label.csv
-
+자연어 정제 완료한 tweet들(hanspell.csv)로 텍스트 감정분석 API 진행한 결과 
+    opm/sentiment.py > opm/sentiment_result.json
+텍스트 감정분석 결과가 저장된 json 형식 파일에서 긍정/부정 tweet 판단 결과를 DataFrame으로 저장 
+    opm/sentiment_to_DataFrame.py > opm/y_label.csv
     텍스트 감정분석 결과를 본래 저장된 opm/word2.csv에 merge
 
 
-트윗에서 명사로 분리된 단어에 대해 TF-IDF 진행, 트윗에 대한 텍스트 감정 분석 결과로 학습하여 긍정/부정적인 단어를 구별하기 위해 logistic regression 진행 > opm/classifier.py
+트윗에서 명사로 분리된 단어에 대해 TF-IDF 진행, 트윗에 대한 텍스트 감정 분석 결과로 학습하여 
+긍정/부정적인 단어를 구별하기 위해 logistic regression 진행 
+    > opm/classifier.py
 
     70%는 train, 30%는 test용으로 데이터셋을 분리
     성능 평가는 confusion matrix, accuracy, precision, recall, F1-score로 진행
