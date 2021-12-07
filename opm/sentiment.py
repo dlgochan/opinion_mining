@@ -4,7 +4,7 @@ import sys
 import requests
 import json
 
-f = open("C:/Users/wngus/Desktop/result.json", mode='w')     # 쓰기 모드
+f = open("opm\sentiment_result.json", mode='w',encoding='UTF-8')     # 쓰기 모드
 result = []
 
 #감정분석 API 연동
@@ -19,7 +19,7 @@ headers = {
 }
 
 #csv 파일 불러오기
-df = pd.read_csv("C:/Users/wngus/Documents/GitHub/opinion_mining/opm/hanspell.csv")
+df = pd.read_csv("opm\hanspell.csv")
 count = len(df)
 
 # text 한 줄씩 읽어서 API 실행

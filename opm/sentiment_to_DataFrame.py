@@ -2,7 +2,7 @@
 import pandas as pd
 import json
 
-f = open("C:/Users/wngus/Documents/GitHub/opinion_mining/opm/fix.json", mode='r',encoding='utf8')
+f = open("opm\sentiment_result.json", mode='r',encoding='UTF-8')
 
 str = []
 y=[]
@@ -23,4 +23,4 @@ for j in str:
 columns=[]
 df=pd.DataFrame(columns=columns)
 df['y']=y
-df.to_csv("C:/Users/wngus/Desktop/df.csv")
+df.to_csv("opm\y_label.csv")
