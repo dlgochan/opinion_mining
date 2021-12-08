@@ -1,6 +1,6 @@
 #-*- coding: utf-8, cp949 -*-
 #-*- Encoding: UTF-8 -*-#
-#%%
+
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
@@ -11,13 +11,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-df = pd.read_csv("C:\Users\osb04\Desktop\Vscode\opinion_mining\apriori", encoding='cp949')
+df = pd.read_csv("./opm/words2.csv", encoding='cp949')
 
-
-# corpus index »ı¼º
-index_vectorizer = CountVectorizer() # ÅäÅ«È­, º¤ÅÍÈ­¸¦ °°ÀÌ ÇØÁÜ
-X = index_vectorizer.fit_transform(df['okt_noun']) # ÅäÅ«È­ ÀÌ¹Ì ÇØ³ùÀ¸´Ï±î ±×³É ÇØ³õÀº°Å ³Ö±â¸¸ ÇÏ¸é µÊ
-# (5744, 7269) :  7269ÀÇ feature¸¦ °¡Áø 5744°³ÀÇ ÇĞ½À µ¥ÀÌÅÍ ¼Â 
+# corpus index ìƒì„±
+index_vectorizer = CountVectorizer() # í† í°í™”, ë²¡í„°í™”ë¥¼ ê°™ì´ í•´ì¤Œ
+X = index_vectorizer.fit_transform(df['okt_noun']) # í† í°í™” ì´ë¯¸ í•´ë†¨ìœ¼ë‹ˆê¹Œ ê·¸ëƒ¥ í•´ë†“ì€ê±° ë„£ê¸°ë§Œ í•˜ë©´ ë¨
+# (5744, 7269) :  7269ì˜ featureë¥¼ ê°€ì§„ 5744ê°œì˜ í•™ìŠµ ë°ì´í„° ì…‹ 
 
 print(X.shape)
 print(X[1])
@@ -30,21 +29,21 @@ print('tf-idf result')
 print(X.shape)
 print(X[1])
 
-#X: tf-idf Ã³¸® ÇÑ ´Ü¾î °á°ú, µ¥ÀÌÅÍ, ·¹ÀÌºí ÀüºÎ Æ÷ÇÔ, test´Â 30%¸¸ »ç¿ë
-#test¿ë µ¥ÀÌÅÍ¼Â ºĞ¸®
+#X: tf-idf ì²˜ë¦¬ í•œ ë‹¨ì–´ ê²°ê³¼, ë°ì´í„°, ë ˆì´ë¸” ì „ë¶€ í¬í•¨, testëŠ” 30%ë§Œ ì‚¬ìš©
+#testìš© ë°ì´í„°ì…‹ ë¶„ë¦¬
 print("random sampling X- train_test label")
 y=df['y']
-x_train, x_test, y_train, y_test = train_test_split(X,y,test_size=0.30, random_state=30)
+x_train, x_test, y_train, y_test = train_test_split(X,y,test_size=0.30, random_state=15)
 print(x_train.shape)
 print(x_test.shape)
 
-# ¸ğµ¨ ÇĞ½À
-lr = LogisticRegression(random_state=0)
+# ëª¨ë¸ í•™ìŠµ
+lr = LogisticRegression(random_state=15)
 lr.fit(x_train, y_train)
 y_pred = lr.predict(x_test)
 y_pred_probability = lr.predict_proba(x_test)[:,1]
 
-#¼º´É Æò°¡
+#ì„±ëŠ¥ í‰ê°€
 print("random sampling X - learning result")
 print("accuracy: %.2f" % accuracy_score(y_test, y_pred))
 print("Precision: %.3f" % precision_score(y_test, y_pred))
@@ -52,80 +51,104 @@ print("Recall: %.3f" % recall_score(y_test, y_pred))
 print("F1: %.3f" % f1_score(y_test, y_pred))
 
 
-#Confusion Matrix Ãâ·Â
+#Confusion Matrix ì¶œë ¥
 print("random sampling X - Confusion_matrix")
 confmat= confusion_matrix(y_true=y_test, y_pred=y_pred)
 print(confmat)
 
-#y°¡ 0°ú 1À» ¾ó¸¶³ª °¡Áö°í ÀÖ´ÂÁö Ãâ·Â(Å¬·¡½º ºÒ±ÕÇü ¹®Á¦ ÇØ°áÀ» À§ÇÔ)
+#yê°€ 0ê³¼ 1ì„ ì–¼ë§ˆë‚˜ ê°€ì§€ê³  ìˆëŠ”ì§€ ì¶œë ¥(í´ë˜ìŠ¤ ë¶ˆê· í˜• ë¬¸ì œ í•´ê²°ì„ ìœ„í•¨)
 print("random sampling X - number of y on 0, 1")
 print(df['y'].value_counts())
 
 
 
 print('===================================================')
-#1:1 ºñÀ²·Î ·£´ı »ùÇÃ¸µ ¼öÇà
-# y°¡ 1,2ÀÎ »ùÇÃ Áß 50°³¸¦ ÀÓÀÇ·Î ÃßÃâÇØ¼­ ºñÀ²À» ¸ÂÃçÁÜ
-positive_random_idx = df[df['y']==1].sample(1300,random_state=30).index.tolist()
-negative_random_idx = df[df['y']==0].sample(1300,random_state=30).index.tolist()
+#1:1 ë¹„ìœ¨ë¡œ ëœë¤ ìƒ˜í”Œë§ ìˆ˜í–‰
+# yê°€ 1,2ì¸ ìƒ˜í”Œ ì¤‘ 50ê°œë¥¼ ì„ì˜ë¡œ ì¶”ì¶œí•´ì„œ ë¹„ìœ¨ì„ ë§ì¶°ì¤Œ
+positive_random_idx = df[df['y']==1].sample(1000,random_state=0).index.tolist()
+negative_random_idx = df[df['y']==0].sample(1000,random_state=0).index.tolist()
 
-#·£´ı µ¥ÀÌÅÍ·Î µ¥ÀÌÅÍ¼ÂÀ» ³ª´®
-# test´Â 30%, train 70%
+#ëœë¤ ë°ì´í„°ë¡œ ë°ì´í„°ì…‹ì„ ë‚˜ëˆ”
+# testëŠ” 30%, train 70%
 print("random sampling O - train_test label")
 random_idx = positive_random_idx+negative_random_idx
 sample_X=X[random_idx,:]
 y= df['y'][random_idx]
-x_train, x_test, y_train, y_test = train_test_split(sample_X, y, test_size = 0.30,random_state=30)
+x_train, x_test, y_train, y_test = train_test_split(sample_X, y, test_size = 0.30, random_state=15)
 print(x_train.shape)
 print(x_test.shape)
 
-#µ¥ÀÌÅÍ¸¦ ´Ù½Ã Á¤Á¦ÇÑ ÈÄ ¸ğµ¨ ÇĞ½À ÀçÁøÇà
-lr = LogisticRegression(random_state=0)
+#ë°ì´í„°ë¥¼ ë‹¤ì‹œ ì •ì œí•œ í›„ ëª¨ë¸ í•™ìŠµ ì¬ì§„í–‰
+lr = LogisticRegression(random_state=15)
 lr.fit(x_train, y_train)
 y_pred = lr.predict(x_test)
 y_pred_probability = lr.predict_proba(x_test)[:,1]
 
-#¼º´É Æò°¡
+#ì„±ëŠ¥ í‰ê°€
 print("random sampling O - learning result")
 print("accuracy: %.2f" % accuracy_score(y_test, y_pred))
 print("Precision: %.3f" % precision_score(y_test, y_pred))
 print("Recall: %.3f" % recall_score(y_test, y_pred))
 print("F1: %.3f" % f1_score(y_test, y_pred))
 
-#Confusion Matrix Ãâ·Â
+#Confusion Matrix ì¶œë ¥
 print("random sampling O - Confusion_matrix")
 confmat= confusion_matrix(y_true=y_test, y_pred=y_pred)
 print(confmat)
 
-#ÇĞ½ÀÇÑ ¸ğµ¨ÀÇ °è¼ö¸¦ Ãâ·ÂÇÏ¿© ÇÇÃ³ ¿µÇâ·ÂÀ» È®ÀÎ
-# ¾ç¼öÀÎ °ÍµéÀº Æ®À­¿¡¼­ ±àÁ¤ÀûÀÌ¶ó°í ÆÇ´ÜµÇ´Â ´Ü¾î, À½¼ö´Â Æ®À­¿¡¼­ ºÎÁ¤ÀûÀÌ¶ó°í ÆÇ´ÜµÇ´Â ´Ü¾î¶ó°í ÆÇ´ÜÇÔ.
+#í•™ìŠµí•œ ëª¨ë¸ì˜ ê³„ìˆ˜ë¥¼ ì¶œë ¥í•˜ì—¬ í”¼ì²˜ ì˜í–¥ë ¥ì„ í™•ì¸
+# ì–‘ìˆ˜ì¸ ê²ƒë“¤ì€ íŠ¸ìœ—ì—ì„œ ê¸ì •ì ì´ë¼ê³  íŒë‹¨ë˜ëŠ” ë‹¨ì–´, ìŒìˆ˜ëŠ” íŠ¸ìœ—ì—ì„œ ë¶€ì •ì ì´ë¼ê³  íŒë‹¨ë˜ëŠ” ë‹¨ì–´ë¼ê³  íŒë‹¨í•¨.
 plt.rcParams['figure.figsize']=[10,8]
 plt.bar(range(len(lr.coef_[0])), lr.coef_[0])
+plt.ylim([-1, 1.5]) 
+plt.show()
 print(sorted(((value,index) for index, value in enumerate(lr.coef_[0])), reverse=True)[:5])
 print(sorted(((value,index) for index, value in enumerate(lr.coef_[0])), reverse=True)[-5:])
 
-#È¸±Í ¸ğµ¨ÀÇ °è¼ö¸¦ ³ôÀº ¼øÀ¸·Î Á¤·Ä
-# ±àÁ¤ ´Ü¾î¿Í ºÎÁ¤ ´Ü¾î¸¦ Ãâ·ÂÇÏ±â À§ÇØ °è¼ö¸¦ ±âÁØÀ¸·Î ´Ü¾î¸¦ Á¤·ÄÇÏ°í, Á¤·ÄµÈ º¤ÅÍ¸¦ index_vectorizer °´Ã¼¿¡ ´Ù½Ã °á°ú ¸ÊÇÎ
+#íšŒê·€ ëª¨ë¸ì˜ ê³„ìˆ˜ë¥¼ ë†’ì€ ìˆœìœ¼ë¡œ ì •ë ¬
+# ê¸ì • ë‹¨ì–´ì™€ ë¶€ì • ë‹¨ì–´ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ê³„ìˆ˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‹¨ì–´ë¥¼ ì •ë ¬í•˜ê³ , ì •ë ¬ëœ ë²¡í„°ë¥¼ index_vectorizer ê°ì²´ì— ë‹¤ì‹œ ê²°ê³¼ ë§µí•‘
 coef_pos_index = sorted(((value, index) for index, value in enumerate(lr.coef_[0])),reverse=True)
 
-#È¸±Í ¸ğµ¨ÀÇ °è¼ö¸¦ index_vec¿¡ ¸ÊÇÎÇÏ¿© ¾î¶² ÇüÅÂ¼ÒÀÎÁö Ãâ·ÂÇÒ ¼ö ÀÖ°Ô ÇÔ
+#íšŒê·€ ëª¨ë¸ì˜ ê³„ìˆ˜ë¥¼ index_vecì— ë§µí•‘í•˜ì—¬ ì–´ë–¤ í˜•íƒœì†Œì¸ì§€ ì¶œë ¥í•  ìˆ˜ ìˆê²Œ í•¨
 invert_index_vectorizer = {v: k for k, v in index_vectorizer.vocabulary_.items()}
 
-#°è¼ö°¡ ³ôÀº ¼øÀ¸·Î ÇÇÃ³¿¡ ÇüÅÂ¼Ò¸¦ ¸ÊÇÎÇÑ °á°ú¸¦ Ãâ·Â
+#ê³„ìˆ˜ê°€ ë†’ì€ ìˆœìœ¼ë¡œ í”¼ì²˜ì— í˜•íƒœì†Œë¥¼ ë§µí•‘í•œ ê²°ê³¼ë¥¼ ì¶œë ¥
 print(str(invert_index_vectorizer)[:100]+'..')
 
+#ê³„ìˆ˜ê°€ ë†’ì€ featureëŠ” ë¦½ì— ê¸ì •ì ì¸ ì˜í–¥ì„ ì£¼ëŠ” í˜•íƒœì†Œ
 print("Positive top 20")
-#°è¼ö°¡ ³ôÀº feature´Â ¸³¿¡ ±àÁ¤ÀûÀÎ ¿µÇâÀ» ÁÖ´Â ÇüÅÂ¼Ò
 i=0
-for coef in coef_pos_index[:40]:
-    print(i,invert_index_vectorizer[coef[1]],coef[0])
+positive_x=[]
+positive_y=[]
+for coef in coef_pos_index[:20]:
+    positive_x.append(invert_index_vectorizer[coef[1]])
+    positive_y.append(coef[0])
     i+=1
 print("================================================================")
+plt.clf()
+plt.rcParams['font.family'] ='Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] =False
+plt.bar(positive_x,positive_y, color="orange")
+plt.title('Positive Top 20')
+plt.xlabel('words')
+plt.ylabel('TF-IDF result')
+plt.show()
 
+#ê³„ìˆ˜ê°€ ë‚®ì€ featureëŠ” ë¦½ì— ë¶€ì •ì ì¸ ì˜í–¥ì„ ì£¼ëŠ” í˜•íƒœì†Œ
 print("Negative top 20==========")
 i=0
-#°è¼ö°¡ ³ôÀº feature´Â ¸³¿¡ ºÎÁ¤ÀûÀÎ ¿µÇâÀ» ÁÖ´Â ÇüÅÂ¼Ò
-for coef in coef_pos_index[-40:]:
-    print(i, invert_index_vectorizer[coef[1]],coef[0])
+negative_x=[]
+negative_y=[]
+for coef in coef_pos_index[-20:]:
+    negative_x.append(invert_index_vectorizer[coef[1]])
+    negative_y.append(coef[0])
     i+=1
-# %%
+
+plt.clf()
+plt.rcParams['font.family'] ='Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] =False
+plt.bar(negative_x,negative_y, color="orange")
+plt.title('Negative Top 20')
+plt.xlabel('words')
+plt.ylabel('TF-IDF result')
+plt.show()
