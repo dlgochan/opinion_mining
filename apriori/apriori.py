@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # ]
 transactions = []
 stop_word = ['위드', '코로나', '단계적', '단계', '일상', '회복', '백신', '패스', '진자', '오늘', '월일', '다음', '네이버', '출처', '뉴스']
-df = pd.read_csv("./words2.csv") # 명사 나눈거 가져오기
+df = pd.read_csv("./words.csv") # 명사 나눈거 가져오기
 tmp = df['okt_noun'] # 각 행을 배열에 담기
 
 # df['okt_noun'] 에 담겨있는 문자열을 list 자료형으로 변환
