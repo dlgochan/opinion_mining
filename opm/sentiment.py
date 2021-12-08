@@ -7,9 +7,10 @@ import json
 f = open("opm\sentiment_result.json", mode='w',encoding='UTF-8')     # 쓰기 모드
 result = []
 
-#감정분석 API 연동
-client_id = "go0qt8vm6i"
-client_secret = "6zy44GwDgpAROILjgVuhBXFnfAZmuRzFHJ1e5etS"
+# 감정분석 API 연동
+# 수빈 계정으로 업데이트
+client_id = "lezo3ogzqg"
+client_secret = "llsiREmWUFRxHcPXsONaf17WqnP6aieO01FnbXst"
 url="https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze"
 
 headers = {
@@ -19,7 +20,7 @@ headers = {
 }
 
 #csv 파일 불러오기
-df = pd.read_csv("opm\hanspell.csv")
+df = pd.read_csv("./nlp/omicron_hanspell.csv")
 count = len(df)
 
 # text 한 줄씩 읽어서 API 실행

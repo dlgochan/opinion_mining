@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 
-f_input = open("./rm_dup.json", mode="r")
+f_input = open("./omicron_deduplication.json", mode="r")
 # f_output = open("df.json", mode="w", encoding='utf8')
 str = []
 tweets = []
@@ -30,5 +30,6 @@ for tweet in tweets:
     i+=1
 
 df.to_csv("../nlp/tweets.csv")
+df.to_csv("../nlp/omicron.csv")
 
 # 이제부터 자연어 처리 시작

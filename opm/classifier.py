@@ -1,6 +1,6 @@
 #-*- coding: utf-8, cp949 -*-
 #-*- Encoding: UTF-8 -*-#
-
+#%%
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-df = pd.read_csv("./opm/words2.csv", encoding='cp949')
+df = pd.read_csv("./opm/words.csv", encoding='utf8')
 
 # corpus index 생성
 index_vectorizer = CountVectorizer() # 토큰화, 벡터화를 같이 해줌
@@ -36,6 +36,7 @@ y=df['y']
 x_train, x_test, y_train, y_test = train_test_split(X,y,test_size=0.30, random_state=15)
 print(x_train.shape)
 print(x_test.shape)
+# (4284, 7107), (1837, 7107)
 
 # 모델 학습
 lr = LogisticRegression(random_state=15)
@@ -152,3 +153,4 @@ plt.title('Negative Top 20')
 plt.xlabel('words')
 plt.ylabel('TF-IDF result')
 plt.show()
+# %%

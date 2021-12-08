@@ -13,7 +13,7 @@ def text_cleaning(text):
     return result
 
 # 크롤링 데이터 읽기
-df = pd.read_csv("tweets.csv")
+df = pd.read_csv("./nlp/omicron.csv")
 
 
 columns = []
@@ -29,7 +29,6 @@ def text_hanspell(text):
 df3 = pd.DataFrame(columns=columns)
 df3['han_text'] = df2['ko_text'].apply(lambda x : text_hanspell(x))
 
-df3.to_csv("./hanspell.csv")
+df3.to_csv("./nlp/omicron_hanspell.csv")
     
-# ============================ 여기까지 맞춤법 교정
 

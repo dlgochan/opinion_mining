@@ -2,7 +2,7 @@
 import pandas as pd
 import json
 
-f = open("opm\sentiment_result.json", mode='r',encoding='UTF-8')
+f = open("./opm/sentiment_result.json", mode='r',encoding='UTF-8')
 
 str = []
 y=[]
@@ -20,7 +20,8 @@ for j in str:
         else:
             y.append(1)
 
+
 columns=[]
 df=pd.DataFrame(columns=columns)
 df['y']=y
-df.to_csv("opm\y_label.csv")
+df.to_csv("./opm/y_label.csv")

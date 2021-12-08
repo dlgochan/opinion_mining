@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 # ]
 transactions = []
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 stop_word = ['위드', '코로나', '단계적', '단계', '일상', '회복', '백신', '패스', '진자']
 df = pd.read_csv("./apriori/words2.csv") # 명사 나눈거 가져오기
@@ -18,6 +19,10 @@ df = pd.read_csv("./apriori/words2.csv") # 명사 나눈거 가져오기
 stop_word = ['위드', '코로나', '단계적', '단계', '일상', '회복', '백신', '패스', '진자', '오늘', '월일', '다음', '네이버', '출처', '뉴스']
 df = pd.read_csv("./words2.csv") # 명사 나눈거 가져오기
 >>>>>>> 715b7c0af50e5b63f073fe4653f62223919c186a
+=======
+stop_word = ['위드', '코로나', '단계적', '단계', '일상', '회복', '백신', '패스', '진자', '오늘', '월일', '다음', '네이버', '출처', '뉴스']
+df = pd.read_csv("./words.csv") # 명사 나눈거 가져오기
+>>>>>>> 673cfc13091522d86729fdcc4246585dc46e90ca
 tmp = df['okt_noun'] # 각 행을 배열에 담기
 
 # df['okt_noun'] 에 담겨있는 문자열을 list 자료형으로 변환
@@ -44,10 +49,13 @@ for i in range(0, len(transactions)):
 # apriori 수행
 results = list(apriori(transactions,  # apriori 파라미터 조절
 <<<<<<< HEAD
+<<<<<<< HEAD
             min_support=100/5745,
             min_confidence=0.5,
             min_lift=1.5,
 =======
+=======
+>>>>>>> 673cfc13091522d86729fdcc4246585dc46e90ca
             min_support=20/5745,
             min_confidence=0.8,
             min_lift=3.0,
