@@ -90,7 +90,8 @@ for index, row in node_df.iterrows():
 
 
 # 디자인 관련 파라미터
-pos = nx.spring_layout(G, k=0.6, iterations=50)
+# pos = nx.spring_layout(G, k=0.6, iterations=50)
+pos = nx.kamada_kawai_layout(G)
 sizes = [G.nodes[node]['nodesize']*20 for node in G]
 nx.draw(G, pos=pos, node_size=sizes)
 

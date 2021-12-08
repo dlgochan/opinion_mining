@@ -1,8 +1,11 @@
 import json
 from typing import Collection
 
-f_input = open("./twitter.json", mode="r")
-f_output = open("deduplication.json", mode="w", encoding='utf8')
+# f_input = open("./twitter.json", mode="r")
+f_input = open("./omicron.json", mode="r")
+
+# f_output = open("deduplication.json", mode="w", encoding='utf8')
+f_output = open("omicron_deduplication.json", mode="w", encoding='utf8')
 str = []
 tweets = []
 
