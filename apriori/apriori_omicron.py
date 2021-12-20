@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 # ]
 transactions = []
 
-df = pd.read_csv("./words.csv") # 명사 나눈거 가져오기
+df = pd.read_csv("./omicron.csv")
 
 tmp = df['okt_noun'] # 각 행을 배열에 담기
 
@@ -36,7 +36,7 @@ for i in range(0, len(transactions)):
 results = list(apriori(transactions,  # apriori 파라미터 조절
             min_support=20/5745,
             min_confidence=0.7,
-            min_lift=20,
+            min_lift=30,
             max_length=2))
 
 # results를 network_df 에 입력
@@ -66,7 +66,6 @@ for key in counter.keys():
     series = pd.Series(row, index=node_df.columns)
     node_df = node_df.append(series, ignore_index=True)
 
-# node_df = node_df[node_df['nodesize'] >= 30]  # node의 최소 frequency 조절
 node_df = node_df[node_df['nodesize'] >= 1]
 print(node_df.head())
 #################################################################
